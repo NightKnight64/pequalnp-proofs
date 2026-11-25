@@ -1,7 +1,7 @@
 import Mathlib.Data.Finset.Card
 import PEqualNP.Defs
 
-namespace PEqualNP.Outside.Meta5468
+namespace PEqualNP.Outside.L_meta_5468
 open PEqualNP.CircuitLowerBounds PEqualNP.MetaComplexity PEqualNP.Represents
 
 private def step (x : List Bool) (g : Gate) : List Bool :=
@@ -138,14 +138,13 @@ theorem upper :
   simp only [witness, List.mem_cons, List.not_mem_nil, or_false] at gm
   rcases gm with rfl | rfl | rfl | rfl | rfl <;> simp
 
-end PEqualNP.Outside.Meta5468
+end PEqualNP.Outside.L_meta_5468
 
-open PEqualNP.Outside.Meta5468 in
 theorem PEqualNP.Outside.L_meta_5468 :
 PEqualNP.Represents.RepSizeAtMost (fun u v : Fin 4 => (1919 : ℕ).testBit (4 * u.val + v.val)) 5 ∧
   ¬ PEqualNP.Represents.RepSizeAtMost (fun u v : Fin 4 => (1919 : ℕ).testBit (4 * u.val + v.val)) 4 := by
-  refine ⟨upper, ?_⟩
+  refine ⟨PEqualNP.Outside.L_meta_5468.upper, ?_⟩
   rintro ⟨C, mono, size, represents⟩
-  obtain ⟨S, count, ordered⟩ := support C 8 mono
-  have needed := core (C := C) (S := S) represents ordered
+  obtain ⟨S, count, ordered⟩ := PEqualNP.Outside.L_meta_5468.support C 8 mono
+  have needed := PEqualNP.Outside.L_meta_5468.core (C := C) (S := S) represents ordered
   omega
